@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rift Pick</title>
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+
+    <noscript>
+        <div class="noscript-warning">
+            Rift Pick necesita JavaScript habilitado para funcionar correctamente.
+        </div>
+    </noscript>
+
+    <div class="app-container">
+
+        <!-- Pantalla Inicial: Selección de Rol -->
+        <section id="role-selection-screen" class="screen">
+            <header class="header">
+                <h1 class="brand-title">RIFT PICK</h1>
+                <p class="subtitle">¿En qué rol vas a jugar?</p>
+            </header>
+
+            <div class="roles-container" id="roles-selector">
+                <button class="role-btn" data-role="Superior">Superior</button>
+                <button class="role-btn" data-role="Jungla">Jungla</button>
+                <button class="role-btn" data-role="Medio">Medio</button>
+                <button class="role-btn" data-role="Tirador">Tirador</button>
+                <button class="role-btn" data-role="Soporte">Soporte</button>
+            </div>
+
+            <button id="continue-btn" class="btn-primary hidden">Continuar</button>
+        </section>
+
+        <!-- Pantalla Principal: Draft -->
+        <section id="draft-screen" class="screen hidden">
+            <header class="header">
+                <h1 class="brand-title">RIFT PICK</h1>
+            </header>
+
+            <main class="draft-container">
+                <!-- Sección: Mi equipo -->
+                <section class="draft-section">
+                    <h2 class="section-title">Mi equipo</h2>
+                    <div class="cards-grid" id="my-team-grid"></div>
+                </section>
+
+                <!-- Sección: Equipo rival -->
+                <section class="draft-section">
+                    <h2 class="section-title">Equipo rival</h2>
+                    <div class="cards-grid" id="enemy-team-grid"></div>
+                </section>
+            </main>
+        </section>
+
+    </div>
+
+    <!-- Modal Selector de Campeones -->
+    <div 
+        id="champion-modal" 
+        class="modal-overlay hidden" 
+        role="dialog" 
+        aria-modal="true" 
+        aria-labelledby="modal-title"
+    >
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 id="modal-title" class="modal-title">Seleccionar Campeón</h3>
+                <button id="modal-close-btn" class="modal-close" aria-label="Cerrar ventana modal">&times;</button>
+            </div>
+            
+            <div class="modal-body">
+                <label for="champion-search" class="visually-hidden">Buscar campeón por nombre</label>
+                <input 
+                    type="text" 
+                    id="champion-search" 
+                    class="search-input" 
+                    placeholder="Buscar campeón..." 
+                    autocomplete="off"
+                >
+
+                <!-- Filtros Inteligentes (Fase 4) -->
+                <div class="filters-container">
+                    <div class="filter-group">
+                        <label for="filter-role" class="visually-hidden">Filtrar por rol</label>
+                        <select id="filter-role" class="filter-select">
+                            <option value="all">Rol: Todos</option>
+                            <option value="Superior">Superior</option>
+                            <option value="Jungla">Jungla</option>
+                            <option value="Medio">Medio</option>
+                            <option value="Tirador">Tirador</option>
+                            <option value="Soporte">Soporte</option>
+                        </select>
+                    </div>
+
+                    <div class="filter-group">
+                        <label for="filter-damage" class="visually-hidden">Filtrar por daño</label>
+                        <select id="filter-damage" class="filter-select">
+                            <option value="all">Daño: Todos</option>
+                            <option value="AD">AD</option>
+                            <option value="AP">AP</option>
+                        </select>
+                    </div>
+
+                    <div class="filter-group">
+                        <label for="filter-range" class="visually-hidden">Filtrar por rango</label>
+                        <select id="filter-range" class="filter-select">
+                            <option value="all">Rango: Todos</option>
+                            <option value="Melee">Melee</option>
+                            <option value="Ranged">Ranged</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div id="champions-list" class="champions-list"></div>
+            </div>
+        </div>
+    </div>
+
+    <script src="js/champions.js"></script>
+    <script src="js/app.js"></script>
+</body>
+</html>
