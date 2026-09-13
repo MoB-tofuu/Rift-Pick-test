@@ -1,1 +1,490 @@
+/* ==========================================================================
+   Variables y Configuraciones Globales
+   ========================================================================== */
+:root {
+    /* Paleta de Colores */
+    --bg-dark: #0b131e;
+    --bg-card: #152232;
+    --bg-card-hover: #1e2f45;
+    --bg-modal: #111a28;
+    
+    --text-primary: #f1f5f9;
+    --text-secondary: #94a3b8;
+    --text-disabled: #475569;
+    
+    --accent-turquoise: #14b8a6;
+    --accent-turquoise-hover: #0d9488;
+    --accent-gold: #f59e0b;
+    --accent-gold-hover: #d97706;
+    
+    --border-color: #243447;
+    
+    /* Radio de Bordes */
+    --radius-md: 10px;
+    --radius-lg: 16px;
 
+    /* Espaciados */
+    --space-xs: 0.25rem;
+    --space-sm: 0.5rem;
+    --space-md: 1rem;
+    --space-lg: 1.5rem;
+    --space-xl: 2rem;
+
+    /* Sombras */
+    --shadow-card: 0 4px 12px rgba(0, 0, 0, 0.3);
+    --shadow-modal: 0 8px 24px rgba(0, 0, 0, 0.6);
+    
+    /* Fuente y Transiciones */
+    --font-sans: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, sans-serif;
+    --transition-btn: background-color 0.2s ease-in-out, border-color 0.2s ease-in-out, color 0.2s ease-in-out, transform 0.15s ease-out;
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    /* Evita el destello/tap delay grisáceo por defecto en navegadores móviles Android */
+    -webkit-tap-highlight-color: transparent;
+}
+
+html {
+    /* Previene scroll horizontal accidental que confunda el eje de desplazamiento */
+    overflow-x: hidden;
+    /* Informa al compositor que el paneo vertical tiene prioridad inmediata */
+    touch-action: pan-y;
+    -webkit-text-size-adjust: 100%;
+}
+
+body {
+    background-color: var(--bg-dark);
+    color: var(--text-primary);
+    font-family: var(--font-sans);
+    min-height: 100vh;
+    min-height: 100dvh;
+    display: flex;
+    justify-content: center;
+    padding: var(--space-lg) var(--space-md);
+    overflow-x: hidden;
+    touch-action: pan-y;
+}
+
+/* ==========================================================================
+   Estructura, Utilidades y Accesibilidad
+   ========================================================================== */
+.app-container {
+    width: 100%;
+    max-width: 800px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+}
+
+.screen {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    gap: var(--space-xl);
+}
+
+.hidden {
+    display: none !important;
+}
+
+.visually-hidden {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
+}
+
+.noscript-warning {
+    background-color: var(--accent-gold);
+    color: #0b131e;
+    text-align: center;
+    padding: var(--space-md);
+    font-weight: 700;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 2000;
+}
+
+.header {
+    text-align: center;
+}
+
+.brand-title {
+    font-size: 2.25rem;
+    font-weight: 800;
+    letter-spacing: 2px;
+    color: var(--text-primary);
+}
+
+.subtitle {
+    font-size: 1.1rem;
+    color: var(--text-secondary);
+    margin-top: var(--space-sm);
+}
+
+/* ==========================================================================
+   Pantalla Inicial (Selección de Rol)
+   ========================================================================== */
+.roles-container {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+    width: 100%;
+    max-width: 360px;
+}
+
+.role-btn {
+    background-color: var(--bg-card);
+    border: 1px solid var(--border-color);
+    color: var(--text-primary);
+    padding: var(--space-md);
+    font-size: 1rem;
+    font-weight: 600;
+    border-radius: var(--radius-md);
+    cursor: pointer;
+    transition: var(--transition-btn);
+    text-align: center;
+    touch-action: pan-y;
+    -webkit-user-select: none;
+    user-select: none;
+}
+
+.role-btn:hover {
+    background-color: var(--bg-card-hover);
+    border-color: var(--accent-turquoise);
+}
+
+.role-btn.active {
+    background-color: var(--bg-card-hover);
+    border: 2px solid var(--accent-turquoise);
+    color: var(--accent-turquoise);
+}
+
+.role-btn:active {
+    transform: scale(0.98);
+}
+
+.btn-primary {
+    background-color: var(--accent-gold);
+    color: #0b131e;
+    border: none;
+    padding: 0.9rem 2.5rem;
+    font-size: 1rem;
+    font-weight: 700;
+    border-radius: var(--radius-md);
+    cursor: pointer;
+    transition: background-color 0.2s ease-in-out, box-shadow 0.2s ease-in-out, transform 0.15s ease-out;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    touch-action: manipulation;
+    -webkit-user-select: none;
+    user-select: none;
+}
+
+.btn-primary:hover {
+    background-color: var(--accent-gold-hover);
+    box-shadow: 0 0 14px rgba(245, 158, 11, 0.35);
+}
+
+.btn-primary:active {
+    background-color: var(--accent-gold-hover);
+    transform: scale(0.97);
+    box-shadow: 0 0 18px rgba(245, 158, 11, 0.45);
+}
+
+/* ==========================================================================
+   Pantalla de Selección (Draft)
+   ========================================================================== */
+.draft-container {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-xl);
+}
+
+.draft-section {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-md);
+}
+
+.section-title {
+    font-size: 1.2rem;
+    color: var(--accent-turquoise);
+    border-left: 4px solid var(--accent-turquoise);
+    padding-left: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.cards-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 0.75rem;
+}
+
+.draft-card {
+    background-color: var(--bg-card);
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-md);
+    padding: var(--space-md);
+    color: var(--text-primary);
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    text-align: left;
+    transition: background-color 0.2s ease-in-out, border-color 0.2s ease-in-out, box-shadow 0.2s ease-in-out, transform 0.15s ease-out;
+    display: flex;
+    align-items: center;
+    gap: 0.85rem;
+    box-shadow: var(--shadow-card);
+    touch-action: pan-y;
+    -webkit-user-select: none;
+    user-select: none;
+}
+
+.draft-card:hover {
+    background-color: var(--bg-card-hover);
+    border-color: var(--accent-turquoise);
+}
+
+.draft-card:active {
+    transform: scale(0.985);
+    background-color: var(--bg-card-hover);
+}
+
+.draft-card.has-champion {
+    border-color: var(--accent-turquoise);
+    padding: 0.75rem var(--space-md);
+}
+
+.card-portrait {
+    width: 48px;
+    height: 48px;
+    border-radius: 8px;
+    object-fit: cover;
+    background-color: var(--bg-dark);
+    border: 1px solid var(--border-color);
+    flex-shrink: 0;
+    pointer-events: none;
+}
+
+.card-info {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-xs);
+    pointer-events: none;
+}
+
+.card-champ-name {
+    font-size: 1.05rem;
+    font-weight: 700;
+    color: var(--text-primary);
+}
+
+.card-champ-role {
+    font-size: 0.85rem;
+    color: var(--text-secondary);
+    font-weight: 500;
+}
+
+/* ==========================================================================
+   Modal Selector de Campeones & Animaciones
+   ========================================================================== */
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(0, 0, 0, 0.75);
+    backdrop-filter: blur(4px);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: var(--space-md);
+    z-index: 1000;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.2s ease-in-out;
+    overscroll-behavior: contain;
+    will-change: opacity;
+}
+
+.modal-overlay.is-open {
+    opacity: 1;
+    pointer-events: auto;
+}
+
+.modal-content {
+    background-color: var(--bg-modal);
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-lg);
+    width: 100%;
+    max-width: 460px;
+    max-height: 80vh;
+    max-height: 80dvh;
+    display: flex;
+    flex-direction: column;
+    box-shadow: var(--shadow-modal);
+    overflow: hidden;
+    transform: scale(0.95);
+    transition: transform 0.2s ease-in-out;
+    will-change: transform;
+    overscroll-behavior: contain;
+}
+
+.modal-overlay.is-open .modal-content {
+    transform: scale(1);
+}
+
+.modal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1.25rem;
+    border-bottom: 1px solid var(--border-color);
+}
+
+.modal-title {
+    font-size: 1.25rem;
+    color: var(--text-primary);
+    -webkit-user-select: none;
+    user-select: none;
+}
+
+.modal-close {
+    background: none;
+    border: none;
+    color: var(--text-secondary);
+    font-size: 1.75rem;
+    cursor: pointer;
+    line-height: 1;
+    transition: color 0.2s ease-in-out, transform 0.15s ease-out;
+    touch-action: manipulation;
+    padding: var(--space-xs);
+}
+
+.modal-close:hover {
+    color: var(--text-primary);
+}
+
+.modal-close:active {
+    transform: scale(0.9);
+    color: var(--text-primary);
+}
+
+.modal-body {
+    padding: 1.25rem;
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-md);
+    overflow: hidden;
+    overscroll-behavior: contain;
+}
+
+.search-input {
+    width: 100%;
+    background-color: var(--bg-dark);
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-md);
+    padding: 0.85rem var(--space-md);
+    color: var(--text-primary);
+    font-size: 0.95rem;
+    outline: none;
+    transition: border-color 0.2s ease-in-out;
+    touch-action: manipulation;
+}
+
+.search-input:focus {
+    border-color: var(--accent-turquoise);
+}
+
+.champions-list {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-sm);
+    overflow-y: auto;
+    max-height: 50vh;
+    max-height: 50dvh;
+    padding-right: var(--space-xs);
+    -webkit-overflow-scrolling: touch;
+    overscroll-behavior-y: contain;
+    touch-action: pan-y;
+}
+
+.champion-item {
+    background-color: var(--bg-card);
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-md);
+    padding: 0.6rem 0.85rem;
+    color: var(--text-primary);
+    font-size: 0.95rem;
+    font-weight: 600;
+    text-align: left;
+    cursor: pointer;
+    transition: background-color 0.15s ease-in-out, border-color 0.15s ease-in-out, opacity 0.15s ease-in-out, transform 0.12s ease-out;
+    display: flex;
+    align-items: center;
+    gap: 0.85rem;
+    touch-action: pan-y;
+    -webkit-user-select: none;
+    user-select: none;
+}
+
+.champion-item:hover:not(:disabled) {
+    background-color: var(--bg-card-hover);
+    border-color: var(--accent-turquoise);
+}
+
+.champion-item:active:not(:disabled) {
+    background-color: var(--bg-card-hover);
+    border-color: var(--accent-turquoise);
+    transform: scale(0.99);
+}
+
+.champion-item:disabled {
+    opacity: 0.4;
+    cursor: not-allowed;
+    border-color: transparent;
+    color: var(--text-disabled);
+    pointer-events: none;
+}
+
+.modal-portrait {
+    width: 40px;
+    height: 40px;
+    border-radius: 6px;
+    object-fit: cover;
+    background-color: var(--bg-dark);
+    border: 1px solid var(--border-color);
+    flex-shrink: 0;
+    pointer-events: none;
+}
+
+.no-results {
+    color: var(--text-secondary);
+    text-align: center;
+    padding: var(--space-lg) 0;
+    font-size: 0.95rem;
+}
+
+/* ==========================================================================
+   Diseño Responsive
+   ========================================================================== */
+@media (min-width: 600px) {
+    .cards-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
