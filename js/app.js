@@ -138,6 +138,8 @@ function createDraftCardElement(team, role) {
     card.className = 'draft-card';
     card.dataset.team = team;
     card.dataset.role = role;
+    card.type = 'button';
+    card.setAttribute('aria-label', `Seleccionar campeón para ${role}`);
 
     populateDraftCardContent(card, team, role);
     card.addEventListener('click', () => openModal(team, role));
@@ -172,7 +174,7 @@ function populateDraftCardContent(cardElement, team, role) {
         cardElement.appendChild(infoDiv);
     } else {
         cardElement.classList.remove('has-champion');
-        cardElement.textContent = `+ ${role}`;
+        cardElement.innerHTML = `<span class="empty-slot-plus">+</span><span class="empty-slot-label">${role}</span>`;
     }
 }
 
